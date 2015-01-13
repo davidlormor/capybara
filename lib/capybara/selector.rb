@@ -208,7 +208,7 @@ Capybara.add_selector(:select) do
   xpath { |locator| XPath::HTML.select(locator) }
   filter(:options) do |node, options|
     actual = node.all(:xpath, './/option').map { |option| option.text }
-    options.sort == actual.sort
+    options.map(&:to_s).sort == actual.sort
   end
   filter(:with_options) { |node, options| options.all? { |option| node.first(:option, option) } }
   filter(:selected) do |node, selected|
